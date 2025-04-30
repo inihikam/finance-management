@@ -7,6 +7,7 @@ import {
   Transaction,
   FinancialPlan,
   UserFinancialSummary,
+  ExpenseCategory,
 } from "@/types/finance";
 import { getTransactionsByUser } from "@/services/transactionService";
 import {
@@ -36,6 +37,12 @@ export default function Dashboard() {
     needsAllocation: 0,
     wantsAllocation: 0,
     savingsAllocation: 0,
+    needsSpent: 0,
+    wantsSpent: 0,
+    savingsSpent: 0,
+    needsRemaining: 0,
+    wantsRemaining: 0,
+    savingsRemaining: 0,
     period: "monthly",
   });
   const [loading, setLoading] = useState(true);
@@ -52,14 +59,14 @@ export default function Dashboard() {
     async function loadUserData() {
       try {
         // Load user's transactions
-        const userTransactions = await getTransactionsByUser(currentUser.uid);
+        const userTransactions = await getTransactionsByUser(currentUser!.uid);
         setTransactions(userTransactions);
 
         // Load or create financial plan
-        let plan = await getUserLatestFinancialPlan(currentUser.uid);
+        let plan = await getUserLatestFinancialPlan(currentUser!.uid);
         if (!plan) {
-          await createDefaultFinancialPlan(currentUser.uid);
-          plan = await getUserLatestFinancialPlan(currentUser.uid);
+          await createDefaultFinancialPlan(currentUser!.uid);
+          plan = await getUserLatestFinancialPlan(currentUser!.uid);
         }
         setFinancialPlan(plan);
 
