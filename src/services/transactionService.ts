@@ -8,9 +8,7 @@ import {
   query,
   where,
   getDocs,
-  orderBy,
   Timestamp,
-  DocumentData,
 } from "firebase/firestore";
 import { Transaction, TransactionType } from "@/types/finance";
 

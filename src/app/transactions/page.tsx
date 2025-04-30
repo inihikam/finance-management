@@ -73,15 +73,15 @@ export default function TransactionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
+    <div className="min-h-screen bg-[#DFD0B8] bg-opacity-30">
+      <header className="bg-[#222831] shadow">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl sm:text-3xl font-bold text-gray-900">
+          <h1 className="text-xl sm:text-3xl font-bold text-[#DFD0B8]">
             Transaksi
           </h1>
           <button
             onClick={() => router.push("/dashboard")}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50"
+            className="px-3 py-2 border border-transparent rounded-md text-sm font-medium text-[#222831] bg-[#DFD0B8] hover:bg-[#948979]"
           >
             Kembali
           </button>
@@ -92,7 +92,7 @@ export default function TransactionsPage() {
         <div className="bg-white shadow rounded-lg p-4 sm:p-6">
           <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
-              <h2 className="text-lg sm:text-xl font-semibold">
+              <h2 className="text-lg sm:text-xl font-semibold text-[#222831]">
                 Semua Transaksi
               </h2>
               <div className="inline-flex rounded-md shadow-sm w-full sm:w-auto">
@@ -100,8 +100,8 @@ export default function TransactionsPage() {
                   onClick={() => setFilterType("all")}
                   className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-l-md ${
                     filterType === "all"
-                      ? "bg-indigo-600 text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-50"
+                      ? "bg-[#222831] text-[#DFD0B8]"
+                      : "bg-white text-[#222831] hover:bg-[#DFD0B8] hover:bg-opacity-50"
                   } border flex-1 sm:flex-none`}
                 >
                   Semua
@@ -110,8 +110,8 @@ export default function TransactionsPage() {
                   onClick={() => setFilterType("income")}
                   className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium ${
                     filterType === "income"
-                      ? "bg-green-600 text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-50"
+                      ? "bg-[#222831] text-[#DFD0B8]"
+                      : "bg-white text-[#222831] hover:bg-[#DFD0B8] hover:bg-opacity-50"
                   } border-t border-b border-l flex-1 sm:flex-none`}
                 >
                   Pemasukan
@@ -120,8 +120,8 @@ export default function TransactionsPage() {
                   onClick={() => setFilterType("expense")}
                   className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-r-md ${
                     filterType === "expense"
-                      ? "bg-red-600 text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-50"
+                      ? "bg-[#222831] text-[#DFD0B8]"
+                      : "bg-white text-[#222831] hover:bg-[#DFD0B8] hover:bg-opacity-50"
                   } border flex-1 sm:flex-none`}
                 >
                   Pengeluaran
@@ -132,13 +132,13 @@ export default function TransactionsPage() {
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
               <button
                 onClick={() => router.push("/transactions/add?type=income")}
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 w-full sm:w-auto"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46] w-full sm:w-auto"
               >
                 + Pemasukan
               </button>
               <button
                 onClick={() => router.push("/transactions/add?type=expense")}
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 w-full sm:w-auto"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46] w-full sm:w-auto"
               >
                 + Pengeluaran
               </button>
@@ -146,7 +146,7 @@ export default function TransactionsPage() {
           </div>
 
           {filteredTransactions.length === 0 ? (
-            <div className="py-6 sm:py-8 text-center text-gray-500 text-sm sm:text-base">
+            <div className="py-6 sm:py-8 text-center text-[#393E46] text-sm sm:text-base">
               {filterType === "all"
                 ? "Belum ada transaksi. Mulai dengan menambahkan pemasukan atau pengeluaran."
                 : `Tidak ada transaksi ${
@@ -156,67 +156,83 @@ export default function TransactionsPage() {
           ) : (
             <div className="overflow-x-auto -mx-4 sm:mx-0">
               <div className="inline-block min-w-full align-middle">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-[#DFD0B8]">
+                  <thead className="bg-[#DFD0B8] bg-opacity-50">
                     <tr>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Tanggal
                       </th>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Deskripsi
                       </th>
                       <th
                         scope="col"
-                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Kategori
                       </th>
                       <th
                         scope="col"
-                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Tipe
                       </th>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Jumlah
                       </th>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Aksi
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-[#DFD0B8]">
                     {filteredTransactions.map((transaction) => (
-                      <tr key={transaction.id}>
-                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                      <tr
+                        key={transaction.id}
+                        className="hover:bg-[#DFD0B8] hover:bg-opacity-20"
+                      >
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#393E46]">
                           {new Date(transaction.date).toLocaleDateString(
                             "id-ID"
                           )}
                         </td>
-                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#222831] font-medium">
                           {transaction.description}
                         </td>
-                        <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                        <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#393E46]">
                           {transaction.category}
+                          {transaction.planCategory && (
+                            <span className="ml-1 text-xs text-[#948979]">
+                              (
+                              {transaction.planCategory === "needs"
+                                ? "Kebutuhan"
+                                : transaction.planCategory === "wants"
+                                ? "Keinginan"
+                                : transaction.planCategory === "savings"
+                                ? "Tabungan"
+                                : ""}
+                              )
+                            </span>
+                          )}
                         </td>
                         <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
                           <span
-                            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
                               transaction.type === "income"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-red-100 text-red-800"
+                                ? "bg-[#DFD0B8] text-[#222831]"
+                                : "bg-[#393E46] text-[#DFD0B8]"
                             }`}
                           >
                             {transaction.type === "income"
@@ -228,8 +244,8 @@ export default function TransactionsPage() {
                           <span
                             className={
                               transaction.type === "income"
-                                ? "text-green-600"
-                                : "text-red-600"
+                                ? "text-[#222831]"
+                                : "text-[#393E46]"
                             }
                           >
                             {formatRupiah(transaction.amount)}
@@ -238,7 +254,7 @@ export default function TransactionsPage() {
                         <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                           <button
                             onClick={() => handleDelete(transaction.id)}
-                            className="text-red-600 hover:text-red-900"
+                            className="text-[#393E46] hover:text-[#222831]"
                             aria-label="Hapus transaksi"
                           >
                             Hapus

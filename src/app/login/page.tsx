@@ -21,21 +21,21 @@ export default function Login() {
       setLoading(true);
       await login(email, password);
       router.push("/dashboard");
-    } catch (err: any) {
-      setError("Login gagal: " + err.message);
+    } catch (err: Error | unknown) {
+      setError("Login gagal: " + (err instanceof Error ? err.message : String(err)));
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#DFD0B8] bg-opacity-30 px-4">
       <div className="w-full max-w-md space-y-6 p-6 sm:p-8 bg-white rounded-xl shadow-lg">
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#222831]">
             Masuk ke Akun Anda
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-[#393E46]">
             Pantau keuangan Anda dengan Rupiah
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="email-address"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-[#222831] mb-1"
               >
                 Alamat Email
               </label>
@@ -66,7 +66,7 @@ export default function Login() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                className="appearance-none block w-full px-3 py-3 border border-[#948979] rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#222831] focus:border-[#222831] text-sm"
                 placeholder="email@example.com"
               />
             </div>
@@ -74,7 +74,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-[#222831] mb-1"
               >
                 Password
               </label>
@@ -86,7 +86,7 @@ export default function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                className="appearance-none block w-full px-3 py-3 border border-[#948979] rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#222831] focus:border-[#222831] text-sm"
               />
             </div>
           </div>
@@ -95,17 +95,17 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#222831] shadow-sm"
             >
               {loading ? "Memproses..." : "Masuk"}
             </button>
           </div>
 
-          <div className="text-sm text-center">
+          <div className="text-sm text-center text-[#393E46]">
             Belum punya akun?{" "}
             <Link
               href="/signup"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              className="font-medium text-[#222831] hover:text-[#393E46]"
             >
               Daftar Sekarang
             </Link>

@@ -58,7 +58,7 @@ export default function Dashboard() {
         // Load or create financial plan
         let plan = await getUserLatestFinancialPlan(currentUser.uid);
         if (!plan) {
-          const newPlanId = await createDefaultFinancialPlan(currentUser.uid);
+          await createDefaultFinancialPlan(currentUser.uid);
           plan = await getUserLatestFinancialPlan(currentUser.uid);
         }
         setFinancialPlan(plan);
@@ -194,15 +194,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
+    <div className="min-h-screen bg-[#DFD0B8] bg-opacity-30">
+      <header className="bg-[#222831] shadow">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl sm:text-3xl font-bold text-gray-900">
+          <h1 className="text-xl sm:text-3xl font-bold text-[#DFD0B8]">
             Dasbor Keuangan
           </h1>
           <button
             onClick={handleLogout}
-            className="px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+            className="px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#222831] bg-[#DFD0B8] hover:bg-[#948979]"
           >
             Keluar
           </button>
@@ -212,29 +212,31 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
         {/* Financial Summary Section */}
         <div className="bg-white shadow rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-[#222831]">
             Ringkasan Keuangan
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-            <div className="bg-green-50 p-3 sm:p-4 rounded-md border border-green-200">
-              <div className="text-xs sm:text-sm text-gray-500">
+            <div className="bg-[#DFD0B8] bg-opacity-50 p-3 sm:p-4 rounded-md border border-[#948979]">
+              <div className="text-xs sm:text-sm text-[#222831] font-medium">
                 Total Pemasukan
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-gray-900">
+              <div className="text-lg sm:text-2xl font-bold text-[#222831]">
                 {formatRupiah(summary.totalIncome)}
               </div>
             </div>
-            <div className="bg-red-50 p-3 sm:p-4 rounded-md border border-red-200">
-              <div className="text-xs sm:text-sm text-gray-500">
+            <div className="bg-[#DFD0B8] bg-opacity-50 p-3 sm:p-4 rounded-md border border-[#948979]">
+              <div className="text-xs sm:text-sm text-[#222831] font-medium">
                 Total Pengeluaran
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-gray-900">
+              <div className="text-lg sm:text-2xl font-bold text-[#222831]">
                 {formatRupiah(summary.totalExpense)}
               </div>
             </div>
-            <div className="bg-blue-50 p-3 sm:p-4 rounded-md border border-blue-200">
-              <div className="text-xs sm:text-sm text-gray-500">Saldo</div>
-              <div className="text-lg sm:text-2xl font-bold text-gray-900">
+            <div className="bg-[#DFD0B8] bg-opacity-50 p-3 sm:p-4 rounded-md border border-[#948979]">
+              <div className="text-xs sm:text-sm text-[#222831] font-medium">
+                Saldo
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-[#222831]">
                 {formatRupiah(summary.balance)}
               </div>
             </div>
@@ -244,11 +246,11 @@ export default function Dashboard() {
         {/* Financial Plan Section */}
         <div className="bg-white shadow rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
           <div className="flex justify-between items-center mb-3 sm:mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#222831]">
               Rencana Keuangan
             </h2>
             <button
-              className="px-2 py-1 sm:px-3 sm:py-1 border border-gray-300 rounded-md text-xs sm:text-sm text-gray-700 hover:bg-gray-50"
+              className="px-2 py-1 sm:px-3 sm:py-1 border border-[#948979] rounded-md text-xs sm:text-sm text-[#222831] hover:bg-[#DFD0B8]"
               onClick={() => router.push("/financial-plan")}
             >
               Ubah
@@ -256,30 +258,30 @@ export default function Dashboard() {
           </div>
           {financialPlan && (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              <div className="p-3 sm:p-4 border rounded-md">
-                <div className="text-xs sm:text-sm text-gray-500">
+              <div className="p-3 sm:p-4 border border-[#948979] rounded-md">
+                <div className="text-xs sm:text-sm text-[#393E46] font-medium">
                   Kebutuhan ({financialPlan.needs}%)
                 </div>
-                <div className="text-base sm:text-xl font-bold text-gray-900">
+                <div className="text-base sm:text-xl font-bold text-[#222831]">
                   {formatRupiah(summary.needsAllocation)}
                 </div>
 
                 {/* Progress bar for needs */}
                 <div className="mt-2">
-                  <div className="flex justify-between text-xs">
-                    <span>
+                  <div className="flex justify-between text-xs font-medium">
+                    <span className="text-[#393E46]">
                       Terpakai: {formatRupiah(summary.needsSpent || 0)}
                     </span>
-                    <span>
+                    <span className="text-[#393E46]">
                       Sisa: {formatRupiah(summary.needsRemaining || 0)}
                     </span>
                   </div>
-                  <div className="mt-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="mt-1 h-2 bg-[#DFD0B8] rounded-full overflow-hidden">
                     <div
                       className={`h-full ${
                         summary.needsSpent > summary.needsAllocation
                           ? "bg-red-500"
-                          : "bg-blue-600"
+                          : "bg-[#393E46]"
                       }`}
                       style={{
                         width: `${Math.min(
@@ -295,30 +297,30 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="p-3 sm:p-4 border rounded-md">
-                <div className="text-xs sm:text-sm text-gray-500">
+              <div className="p-3 sm:p-4 border border-[#948979] rounded-md">
+                <div className="text-xs sm:text-sm text-[#393E46] font-medium">
                   Keinginan ({financialPlan.wants}%)
                 </div>
-                <div className="text-base sm:text-xl font-bold text-gray-900">
+                <div className="text-base sm:text-xl font-bold text-[#222831]">
                   {formatRupiah(summary.wantsAllocation)}
                 </div>
 
                 {/* Progress bar for wants */}
                 <div className="mt-2">
-                  <div className="flex justify-between text-xs">
-                    <span>
+                  <div className="flex justify-between text-xs font-medium">
+                    <span className="text-[#393E46]">
                       Terpakai: {formatRupiah(summary.wantsSpent || 0)}
                     </span>
-                    <span>
+                    <span className="text-[#393E46]">
                       Sisa: {formatRupiah(summary.wantsRemaining || 0)}
                     </span>
                   </div>
-                  <div className="mt-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="mt-1 h-2 bg-[#DFD0B8] rounded-full overflow-hidden">
                     <div
                       className={`h-full ${
                         summary.wantsSpent > summary.wantsAllocation
                           ? "bg-red-500"
-                          : "bg-purple-600"
+                          : "bg-[#393E46]"
                       }`}
                       style={{
                         width: `${Math.min(
@@ -334,30 +336,30 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="p-3 sm:p-4 border rounded-md">
-                <div className="text-xs sm:text-sm text-gray-500">
+              <div className="p-3 sm:p-4 border border-[#948979] rounded-md">
+                <div className="text-xs sm:text-sm text-[#393E46] font-medium">
                   Tabungan ({financialPlan.savings}%)
                 </div>
-                <div className="text-base sm:text-xl font-bold text-gray-900">
+                <div className="text-base sm:text-xl font-bold text-[#222831]">
                   {formatRupiah(summary.savingsAllocation)}
                 </div>
 
                 {/* Progress bar for savings */}
                 <div className="mt-2">
-                  <div className="flex justify-between text-xs">
-                    <span>
+                  <div className="flex justify-between text-xs font-medium">
+                    <span className="text-[#393E46]">
                       Terpakai: {formatRupiah(summary.savingsSpent || 0)}
                     </span>
-                    <span>
+                    <span className="text-[#393E46]">
                       Sisa: {formatRupiah(summary.savingsRemaining || 0)}
                     </span>
                   </div>
-                  <div className="mt-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="mt-1 h-2 bg-[#DFD0B8] rounded-full overflow-hidden">
                     <div
                       className={`h-full ${
                         summary.savingsSpent > summary.savingsAllocation
                           ? "bg-red-500"
-                          : "bg-green-600"
+                          : "bg-[#393E46]"
                       }`}
                       style={{
                         width: `${Math.min(
@@ -380,11 +382,11 @@ export default function Dashboard() {
         {/* Recent Transactions Section */}
         <div className="bg-white shadow rounded-lg p-4 sm:p-6">
           <div className="flex justify-between items-center mb-3 sm:mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#222831]">
               Transaksi Terbaru
             </h2>
             <button
-              className="px-2 py-1 sm:px-3 sm:py-1 border border-gray-300 rounded-md text-xs sm:text-sm text-gray-700 hover:bg-gray-50"
+              className="px-2 py-1 sm:px-3 sm:py-1 border border-[#948979] rounded-md text-xs sm:text-sm text-[#222831] hover:bg-[#DFD0B8]"
               onClick={() => router.push("/transactions")}
             >
               Lihat Semua
@@ -392,68 +394,71 @@ export default function Dashboard() {
           </div>
 
           {transactions.length === 0 ? (
-            <div className="py-6 sm:py-8 text-center text-gray-500 text-sm sm:text-base">
+            <div className="py-6 sm:py-8 text-center text-[#393E46] text-sm sm:text-base">
               Belum ada transaksi. Mulai tambahkan pemasukan dan pengeluaran
               Anda.
             </div>
           ) : (
             <div className="overflow-x-auto -mx-4 sm:mx-0">
               <div className="inline-block min-w-full align-middle">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-[#DFD0B8]">
+                  <thead className="bg-[#DFD0B8] bg-opacity-50">
                     <tr>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Tanggal
                       </th>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Deskripsi
                       </th>
                       <th
                         scope="col"
-                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Kategori
                       </th>
                       <th
                         scope="col"
-                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Tipe
                       </th>
                       <th
                         scope="col"
-                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-[#222831] uppercase tracking-wider"
                       >
                         Jumlah
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-[#DFD0B8]">
                     {transactions.slice(0, 5).map((transaction) => (
-                      <tr key={transaction.id}>
-                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                      <tr
+                        key={transaction.id}
+                        className="hover:bg-[#DFD0B8] hover:bg-opacity-20"
+                      >
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#393E46]">
                           {new Date(transaction.date).toLocaleDateString(
                             "id-ID"
                           )}
                         </td>
-                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#222831] font-medium">
                           {transaction.description}
                         </td>
-                        <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                        <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-[#393E46]">
                           {transaction.category}
                         </td>
                         <td className="hidden sm:table-cell px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
                           <span
-                            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
                               transaction.type === "income"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-red-100 text-red-800"
+                                ? "bg-[#DFD0B8] text-[#222831]"
+                                : "bg-[#393E46] text-[#DFD0B8]"
                             }`}
                           >
                             {transaction.type === "income"
@@ -465,8 +470,8 @@ export default function Dashboard() {
                           <span
                             className={
                               transaction.type === "income"
-                                ? "text-green-600"
-                                : "text-red-600"
+                                ? "text-[#222831]"
+                                : "text-[#393E46]"
                             }
                           >
                             {formatRupiah(transaction.amount)}
@@ -483,13 +488,13 @@ export default function Dashboard() {
           <div className="mt-4 flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
             <button
               onClick={() => router.push("/transactions/add?type=income")}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 w-full sm:w-auto"
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46] w-full sm:w-auto"
             >
               + Tambah Pemasukan
             </button>
             <button
               onClick={() => router.push("/transactions/add?type=expense")}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 w-full sm:w-auto"
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46] w-full sm:w-auto"
             >
               + Tambah Pengeluaran
             </button>

@@ -109,8 +109,8 @@ export default function AddTransactionPage() {
       });
 
       router.push("/transactions");
-    } catch (err: any) {
-      setError("Failed to add transaction: " + err.message);
+    } catch (err: Error | unknown) {
+      setError("Failed to add transaction: " + (err instanceof Error ? err.message : String(err)));
     } finally {
       setLoading(false);
     }
@@ -121,10 +121,10 @@ export default function AddTransactionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+    <div className="min-h-screen bg-[#DFD0B8] bg-opacity-30">
+      <header className="bg-[#222831] shadow">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <h1 className="text-xl sm:text-3xl font-bold text-[#DFD0B8]">
             {transactionType === "income"
               ? "Tambah Pemasukan"
               : "Tambah Pengeluaran"}
@@ -132,7 +132,7 @@ export default function AddTransactionPage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
         <div className="bg-white shadow rounded-lg p-6">
           {error && (
             <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
@@ -144,7 +144,7 @@ export default function AddTransactionPage() {
             <div>
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
                 Deskripsi
               </label>
@@ -153,7 +153,7 @@ export default function AddTransactionPage() {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full border border-[#948979] rounded-md shadow-sm py-2 px-3 text-[#222831] focus:outline-none focus:ring-[#222831] focus:border-[#222831] sm:text-sm"
                 placeholder={`Masukkan deskripsi ${
                   transactionType === "income" ? "pemasukan" : "pengeluaran"
                 }`}
@@ -163,7 +163,7 @@ export default function AddTransactionPage() {
             <div>
               <label
                 htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
                 Kategori
               </label>
@@ -171,7 +171,7 @@ export default function AddTransactionPage() {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full border border-[#948979] rounded-md shadow-sm py-2 px-3 text-[#222831] focus:outline-none focus:ring-[#222831] focus:border-[#222831] sm:text-sm"
               >
                 <option value="">Pilih kategori</option>
                 {categories.map((cat) => (
@@ -186,7 +186,7 @@ export default function AddTransactionPage() {
               <div>
                 <label
                   htmlFor="planCategory"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-[#222831]"
                 >
                   Kategori Rencana Keuangan
                 </label>
@@ -199,11 +199,11 @@ export default function AddTransactionPage() {
                         type="radio"
                         checked={planCategory === "needs"}
                         onChange={() => setPlanCategory("needs")}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                        className="h-4 w-4 text-[#222831] border-[#948979] focus:ring-[#222831]"
                       />
                       <label
                         htmlFor="needs"
-                        className="ml-2 block text-sm text-gray-700"
+                        className="ml-2 block text-sm text-[#393E46] font-medium"
                       >
                         Kebutuhan
                       </label>
@@ -215,11 +215,11 @@ export default function AddTransactionPage() {
                         type="radio"
                         checked={planCategory === "wants"}
                         onChange={() => setPlanCategory("wants")}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                        className="h-4 w-4 text-[#222831] border-[#948979] focus:ring-[#222831]"
                       />
                       <label
                         htmlFor="wants"
-                        className="ml-2 block text-sm text-gray-700"
+                        className="ml-2 block text-sm text-[#393E46] font-medium"
                       >
                         Keinginan
                       </label>
@@ -231,18 +231,18 @@ export default function AddTransactionPage() {
                         type="radio"
                         checked={planCategory === "savings"}
                         onChange={() => setPlanCategory("savings")}
-                        className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                        className="h-4 w-4 text-[#222831] border-[#948979] focus:ring-[#222831]"
                       />
                       <label
                         htmlFor="savings"
-                        className="ml-2 block text-sm text-gray-700"
+                        className="ml-2 block text-sm text-[#393E46] font-medium"
                       >
                         Tabungan
                       </label>
                     </div>
                   </div>
                 </div>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-[#948979]">
                   Pilih kategori rencana keuangan untuk melacak pengeluaran
                   terhadap alokasi
                 </p>
@@ -252,7 +252,7 @@ export default function AddTransactionPage() {
             <div>
               <label
                 htmlFor="amount"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
                 Jumlah (Rp)
               </label>
@@ -263,7 +263,7 @@ export default function AddTransactionPage() {
                 min="0"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full border border-[#948979] rounded-md shadow-sm py-2 px-3 text-[#222831] focus:outline-none focus:ring-[#222831] focus:border-[#222831] sm:text-sm"
                 placeholder="0"
               />
             </div>
@@ -271,7 +271,7 @@ export default function AddTransactionPage() {
             <div>
               <label
                 htmlFor="date"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
                 Tanggal
               </label>
@@ -280,7 +280,7 @@ export default function AddTransactionPage() {
                 id="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full border border-[#948979] rounded-md shadow-sm py-2 px-3 text-[#222831] focus:outline-none focus:ring-[#222831] focus:border-[#222831] sm:text-sm"
               />
             </div>
 
@@ -288,18 +288,14 @@ export default function AddTransactionPage() {
               <button
                 type="button"
                 onClick={handleCancel}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 border border-[#948979] rounded-md text-sm font-medium text-[#222831] hover:bg-[#DFD0B8]"
               >
                 Batal
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  transactionType === "income"
-                    ? "bg-green-600 hover:bg-green-700"
-                    : "bg-red-600 hover:bg-red-700"
-                }`}
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46]"
               >
                 {loading
                   ? "Menambahkan..."

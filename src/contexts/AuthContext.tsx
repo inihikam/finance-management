@@ -13,13 +13,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  UserCredential,
 } from "firebase/auth";
 import { auth } from "@/firebase/config";
 
 interface AuthContextType {
   currentUser: User | null;
-  signup: (email: string, password: string) => Promise<any>;
-  login: (email: string, password: string) => Promise<any>;
+  signup: (email: string, password: string) => Promise<UserCredential>;
+  login: (email: string, password: string) => Promise<UserCredential>;
   logout: () => Promise<void>;
   loading: boolean;
 }

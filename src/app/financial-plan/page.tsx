@@ -35,7 +35,7 @@ export default function FinancialPlanPage() {
         // Load or create financial plan
         let plan = await getUserLatestFinancialPlan(currentUser.uid);
         if (!plan) {
-          const newPlanId = await createDefaultFinancialPlan(currentUser.uid);
+          await createDefaultFinancialPlan(currentUser.uid);
           plan = await getUserLatestFinancialPlan(currentUser.uid);
         }
 
@@ -156,24 +156,30 @@ export default function FinancialPlanPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Financial Plan Settings
+    <div className="min-h-screen bg-[#DFD0B8] bg-opacity-30">
+      <header className="bg-[#222831] shadow">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-xl sm:text-3xl font-bold text-[#DFD0B8]">
+            Rencana Keuangan
           </h1>
+          <button
+            onClick={handleCancel}
+            className="px-3 py-2 border border-transparent rounded-md text-sm font-medium text-[#222831] bg-[#DFD0B8] hover:bg-[#948979]"
+          >
+            Kembali
+          </button>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
         <div className="bg-white shadow rounded-lg p-6">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">
-              Customize Your Financial Allocation
+            <h2 className="text-xl font-semibold mb-2 text-[#222831]">
+              Atur Alokasi Keuangan Anda
             </h2>
-            <p className="text-gray-600">
-              Adjust how your income should be allocated across your needs,
-              wants, and savings goals. The total must add up to 100%.
+            <p className="text-[#393E46]">
+              Sesuaikan bagaimana pendapatan Anda harus dialokasikan antara
+              kebutuhan, keinginan, dan tabungan. Total harus sama dengan 100%.
             </p>
           </div>
 
@@ -184,25 +190,27 @@ export default function FinancialPlanPage() {
           )}
 
           <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3">Preset Allocations</h3>
+            <h3 className="text-lg font-medium mb-3 text-[#222831]">
+              Alokasi Preset
+            </h3>
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => applyPresetAllocation("balanced")}
-                className="px-4 py-2 bg-blue-100 text-blue-800 rounded-md hover:bg-blue-200"
+                className="px-4 py-2 bg-[#DFD0B8] text-[#222831] rounded-md hover:bg-[#948979] hover:text-white"
               >
-                Balanced (50-30-20)
+                Seimbang (50-30-20)
               </button>
               <button
                 onClick={() => applyPresetAllocation("aggressive-saving")}
-                className="px-4 py-2 bg-green-100 text-green-800 rounded-md hover:bg-green-200"
+                className="px-4 py-2 bg-[#DFD0B8] text-[#222831] rounded-md hover:bg-[#948979] hover:text-white"
               >
-                Aggressive Saving (60-20-20)
+                Tabungan Agresif (60-20-20)
               </button>
               <button
                 onClick={() => applyPresetAllocation("essentials-first")}
-                className="px-4 py-2 bg-purple-100 text-purple-800 rounded-md hover:bg-purple-200"
+                className="px-4 py-2 bg-[#DFD0B8] text-[#222831] rounded-md hover:bg-[#948979] hover:text-white"
               >
-                Essentials First (70-20-10)
+                Kebutuhan Utama (70-20-10)
               </button>
             </div>
           </div>
@@ -211,9 +219,9 @@ export default function FinancialPlanPage() {
             <div>
               <label
                 htmlFor="needs"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
-                Needs (Essential expenses like rent, bills, groceries)
+                Kebutuhan (Pengeluaran penting seperti sewa, tagihan, belanja)
               </label>
               <div className="mt-1 flex items-center">
                 <input
@@ -223,13 +231,15 @@ export default function FinancialPlanPage() {
                   max="100"
                   value={needs}
                   onChange={handleNeedsChange}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-[#DFD0B8] rounded-lg appearance-none cursor-pointer"
                 />
-                <span className="ml-3 w-12 text-gray-700">{needs}%</span>
+                <span className="ml-3 w-12 text-[#393E46] font-medium">
+                  {needs}%
+                </span>
               </div>
-              <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+              <div className="mt-2 h-2 w-full bg-[#DFD0B8] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-600"
+                  className="h-full bg-[#222831]"
                   style={{ width: `${needs}%` }}
                 ></div>
               </div>
@@ -238,9 +248,10 @@ export default function FinancialPlanPage() {
             <div>
               <label
                 htmlFor="wants"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
-                Wants (Non-essential expenses like entertainment, dining out)
+                Keinginan (Pengeluaran non-esensial seperti hiburan, makan di
+                luar)
               </label>
               <div className="mt-1 flex items-center">
                 <input
@@ -250,13 +261,15 @@ export default function FinancialPlanPage() {
                   max="100"
                   value={wants}
                   onChange={handleWantsChange}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-[#DFD0B8] rounded-lg appearance-none cursor-pointer"
                 />
-                <span className="ml-3 w-12 text-gray-700">{wants}%</span>
+                <span className="ml-3 w-12 text-[#393E46] font-medium">
+                  {wants}%
+                </span>
               </div>
-              <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+              <div className="mt-2 h-2 w-full bg-[#DFD0B8] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-purple-600"
+                  className="h-full bg-[#393E46]"
                   style={{ width: `${wants}%` }}
                 ></div>
               </div>
@@ -265,9 +278,9 @@ export default function FinancialPlanPage() {
             <div>
               <label
                 htmlFor="savings"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-[#222831]"
               >
-                Savings (Future goals, emergency funds, investments)
+                Tabungan (Tujuan masa depan, dana darurat, investasi)
               </label>
               <div className="mt-1 flex items-center">
                 <input
@@ -277,33 +290,35 @@ export default function FinancialPlanPage() {
                   max="100"
                   value={savings}
                   onChange={handleSavingsChange}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-[#DFD0B8] rounded-lg appearance-none cursor-pointer"
                 />
-                <span className="ml-3 w-12 text-gray-700">{savings}%</span>
+                <span className="ml-3 w-12 text-[#393E46] font-medium">
+                  {savings}%
+                </span>
               </div>
-              <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+              <div className="mt-2 h-2 w-full bg-[#DFD0B8] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-green-600"
+                  className="h-full bg-[#948979]"
                   style={{ width: `${savings}%` }}
                 ></div>
               </div>
             </div>
 
             <div className="pt-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-2">
+              <h3 className="text-sm font-medium text-[#222831] mb-2">
                 Total: {needs + wants + savings}%
               </h3>
-              <div className="h-4 w-full bg-gray-200 rounded-full overflow-hidden flex">
+              <div className="h-4 w-full bg-[#DFD0B8] rounded-full overflow-hidden flex">
                 <div
-                  className="h-full bg-blue-600"
+                  className="h-full bg-[#222831]"
                   style={{ width: `${needs}%` }}
                 ></div>
                 <div
-                  className="h-full bg-purple-600"
+                  className="h-full bg-[#393E46]"
                   style={{ width: `${wants}%` }}
                 ></div>
                 <div
-                  className="h-full bg-green-600"
+                  className="h-full bg-[#948979]"
                   style={{ width: `${savings}%` }}
                 ></div>
               </div>
@@ -314,17 +329,17 @@ export default function FinancialPlanPage() {
             <button
               type="button"
               onClick={handleCancel}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 border border-[#948979] rounded-md text-sm font-medium text-[#222831] hover:bg-[#DFD0B8]"
             >
-              Cancel
+              Batal
             </button>
             <button
               type="button"
               onClick={handleSave}
               disabled={isSaving}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#DFD0B8] bg-[#222831] hover:bg-[#393E46]"
             >
-              {isSaving ? "Saving..." : "Save Plan"}
+              {isSaving ? "Menyimpan..." : "Simpan Rencana"}
             </button>
           </div>
         </div>
