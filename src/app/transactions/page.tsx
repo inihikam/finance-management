@@ -35,7 +35,7 @@ export default function TransactionsPage() {
 
     async function loadTransactions() {
       try {
-        const userTransactions = await getTransactionsByUser(currentUser.uid);
+        const userTransactions = await getTransactionsByUser(currentUser!.uid);
         setTransactions(userTransactions);
       } catch (error) {
         console.error("Error loading transactions:", error);

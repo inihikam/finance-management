@@ -33,10 +33,10 @@ export default function FinancialPlanPage() {
     async function loadFinancialPlan() {
       try {
         // Load or create financial plan
-        let plan = await getUserLatestFinancialPlan(currentUser.uid);
+        let plan = await getUserLatestFinancialPlan(currentUser!.uid);
         if (!plan) {
-          await createDefaultFinancialPlan(currentUser.uid);
-          plan = await getUserLatestFinancialPlan(currentUser.uid);
+          await createDefaultFinancialPlan(currentUser!.uid);
+          plan = await getUserLatestFinancialPlan(currentUser!.uid);
         }
 
         if (plan) {
