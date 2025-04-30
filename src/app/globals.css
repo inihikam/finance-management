@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Ensure consistent text color for all input elements */
+input,
+select,
+textarea {
+  color: #374151; /* text-gray-700 */
+}
+
+/* Fix placeholder text color for better visibility */
+::placeholder {
+  color: #9ca3af; /* text-gray-400 */
+  opacity: 1;
+}
+
+/* Ensure text is visible during input */
+input, 
+select, 
+textarea, 
+button {
+  font-family: inherit;
+}
+
+/* Prevent white text on white background issues with autofilled inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #374151 !important;
+}
