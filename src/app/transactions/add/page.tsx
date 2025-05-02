@@ -99,7 +99,15 @@ export default function AddTransactionPage() {
       }
 
       // Buat objek transaksi dasar
-      const transactionData = {
+      const transactionData: {
+        userId: string;
+        description: string;
+        category: string;
+        amount: number;
+        type: TransactionType;
+        date: Date;
+        planCategory?: ExpenseCategory;
+      } = {
         userId: currentUser.uid,
         description,
         category,
