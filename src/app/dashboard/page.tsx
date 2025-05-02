@@ -103,13 +103,18 @@ export default function Dashboard() {
     const savingsAllocation = plan ? (totalIncome * plan.savings) / 100 : 0;
 
     // Categorize expenses based on transaction categories
-    // This is a simplified approach - in a real app, you would have a more robust mapping
     const expenseTransactions = userTransactions.filter(
       (t) => t.type === "expense"
     );
 
     // Map transactions to financial plan categories
     const categorizedTransactions = expenseTransactions.map((transaction) => {
+      // Use planCategory if it's already set (prioritize stored value)
+      if (transaction.planCategory) {
+        return { ...transaction };
+      }
+
+      // If planCategory is not available, determine it based on transaction category
       const category = transaction.category.toLowerCase();
       let planCategory: ExpenseCategory = "uncategorized";
 
@@ -123,6 +128,8 @@ export default function Dashboard() {
           "education",
           "healthcare",
           "insurance",
+          "housing",
+          "food",
         ].some((c) => category.includes(c))
       ) {
         planCategory = "needs";
@@ -134,6 +141,7 @@ export default function Dashboard() {
           "travel",
           "hobby",
           "subscription",
+          "personal care",
         ].some((c) => category.includes(c))
       ) {
         planCategory = "wants";

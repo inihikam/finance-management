@@ -22,7 +22,9 @@ export default function Login() {
       await login(email, password);
       router.push("/dashboard");
     } catch (err: Error | unknown) {
-      setError("Login gagal: " + (err instanceof Error ? err.message : String(err)));
+      setError(
+        "Login gagal: " + (err instanceof Error ? err.message : String(err))
+      );
     } finally {
       setLoading(false);
     }
@@ -33,10 +35,10 @@ export default function Login() {
       <div className="w-full max-w-md space-y-6 p-6 sm:p-8 bg-white rounded-xl shadow-lg">
         <div className="text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#222831]">
-            Masuk ke Akun Anda
+            SERAVA
           </h2>
           <p className="mt-2 text-sm text-[#393E46]">
-            Pantau keuangan Anda dengan Rupiah
+            Kendalikan uangmu, tenangkan hidupmu.
           </p>
         </div>
 

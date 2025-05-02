@@ -98,19 +98,30 @@ export default function AddTransactionPage() {
         throw new Error("You must be logged in to add a transaction");
       }
 
-      await addTransaction({
+      // Buat objek transaksi dasar
+      const transactionData = {
         userId: currentUser.uid,
         description,
         category,
         amount: amountValue,
         type: transactionType,
         date: new Date(date),
-        planCategory: transactionType === "expense" ? planCategory : undefined,
-      });
+      };
+
+      // Tambahkan planCategory hanya untuk transaksi expense
+      if (transactionType === "expense") {
+        transactionData.planCategory = planCategory;
+      }
+
+      // Kirim transaksi ke Firestore
+      await addTransaction(transactionData);
 
       router.push("/transactions");
     } catch (err: Error | unknown) {
-      setError("Failed to add transaction: " + (err instanceof Error ? err.message : String(err)));
+      setError(
+        "Failed to add transaction: " +
+          (err instanceof Error ? err.message : String(err))
+      );
     } finally {
       setLoading(false);
     }
