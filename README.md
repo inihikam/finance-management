@@ -1,4 +1,8 @@
-# Financial Management Web Application
+# Serava
+
+> "Find peace in every penny." (English)
+>
+> "Kendalikan uangmu, tenangkan hidupmu." (Bahasa Indonesia)
 
 A comprehensive web application for managing personal finances, including income and expense tracking with customizable financial planning allocations.
 
